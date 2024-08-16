@@ -1,0 +1,10 @@
+name: bacteria_ia
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - numpy==1.26
+  - pandas==2.2.2
+  - python==3.11
+  - pip==24.0
+  - seaborn==0.13.2
