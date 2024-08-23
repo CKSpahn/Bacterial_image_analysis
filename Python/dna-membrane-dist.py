@@ -11,7 +11,7 @@ results_folder = '/Users/esti/Documents/PROYECTOS/NUCLEOID-ECOLI/'
 
 
 
-def extract_data(file_path):
+def extract_data(file_path, intensity_type):
     """
     Extracts the distance between the maximum intensities of Membrane and DNA from a CSV file.
 
@@ -26,7 +26,12 @@ def extract_data(file_path):
 
     # Find the row with maximum intensity for Membrane_intensity and DNA_intensity
     membrane_max = df['Membrane_intensity'].idxmax()
-    mask = df['DNA_intensity'] > (1/np.exp(1))
+    if intensity_type == 'normalized' or intensity_type == 'normalised':
+        mask = df['DNA_intensity'] > (1/np.exp(1))
+    else:
+        th = np.max(df['DNA_intensity'])/np.exp(1)
+        mask = df['DNA_intensity'] > th
+        print(th)
     dna_max = mask.idxmax()
     # Calculate the distance between Membrane and DNA max intensities
     distance = abs(df.loc[membrane_max, 'distance'] - df.loc[dna_max, 'distance'])
@@ -96,8 +101,8 @@ def process_folders(root_folder):
                             # Exclude .DScore files and hidden files
                             if not file.endswith('.DScore') and not file.startswith('.'):
                                 try:
-                                    distance = extract_data(file_path)
                                     cell, roi, intensity_type = extract_information_from_filename(file)
+                                    distance = extract_data(file_path, intensity_type)
                                     results.append({
                                         'condition': condition,
                                         'timepoint': timepoint,
