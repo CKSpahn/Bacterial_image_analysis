@@ -26,8 +26,8 @@ def extract_data(file_path):
 
     # Find the row with maximum intensity for Membrane_intensity and DNA_intensity
     membrane_max = df['Membrane_intensity'].idxmax()
-    dna_max = df['DNA_intensity'].idxmax()
-
+    mask = df['DNA_intensity'] > (1/np.exp(1))
+    dna_max = mask.idxmax()
     # Calculate the distance between Membrane and DNA max intensities
     distance = abs(df.loc[membrane_max, 'distance'] - df.loc[dna_max, 'distance'])
 
