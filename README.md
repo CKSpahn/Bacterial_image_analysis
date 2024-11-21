@@ -21,6 +21,26 @@ root_folder = '/Users/user1/Documents/data/DNA_membrane_distance_diff_treatments
 results_folder = '/Users/user1/Documents/results/'
 ````
 
+## Python code to randomize intensity time traces for circular cross-correlation
+
+1. Clone the repository:
+Open up the terminal and paste the following commands
+````
+git clone https://github.com/CKSpahn/Bacterial_image_analysis.git
+cd Bacterial_image_analysis
+mamba env create -f environment.yml
+mamba activate bacteria_ia
+````
+
+2. Open the file `MreB_randomization_GMM_circular_xCORR.py` inside the Python folder and change the path and parameters:
+
+````
+sigma=0.15 
+number_random_sample=1
+all_plots=False 
+folder=r'D:\dSTORM_DATA\GMM\Data'
+````
+
 ## Fiji macros
 
 ### Overview
